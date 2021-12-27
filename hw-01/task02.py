@@ -13,8 +13,7 @@ def sum_text_numbers(a:str,b:str):
         a = number_lib[a]
         b = number_lib[b]
     except KeyError:
-        print("Parameters 'a' and 'b' must be digit 0-9 by Russian name")
-        return
+        return "Error: Not valid values. Parameters 'a' and 'b' must be digit 0-9 by Russian name"
 
     return ans_num_list[a+b]
 
