@@ -19,9 +19,11 @@ def sum_text_numbers(a:str,b:str):
     return ans_num_list[a+b]
 
 if __name__ == '__main__':
-    print("For exit press Ctrl+C")
+    print("For exit type 'q' in input")
     while True:
         print("Ввод:")
         a = input()
         b = input()
+        if a == 'q' or b == 'q':
+            break
         print('Вывод:\n',sum_text_numbers(a,b))

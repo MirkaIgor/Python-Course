@@ -1,34 +1,37 @@
 def gen_str_numbers(number: int):
 
-    prefixes = {0:'',1:'один',2:'дв',3:'три',4:'четыр',5:'пят',6:'шест',7:'сем',8:'восем',
-                9:'девят',10:'десят'}
+    nums0_10 = {0:'ноль',1:'один',2:'два',3:'три',4:'четыре',5:'пять',6:'шесть',7:'семь',8:'восемь',
+                9:'девять',10:'десять'}
 
-    prefixes_end = {0:'ноль',1:'',2:'а',3:'',4:'е',5:'ь',6:'ь',7:'ь',8:'ь',
-                        9:'ь',10:'ь'}
-    
-    suffixes = {10:'надцать',20:'двадцать',30:'тридцать',40:'сорок',90:'девяносто'}
-    for i in range(50,90,10):
-        suffixes.update({i:prefixes[i/10]+prefixes_end[i/10]+prefixes[10]})
+    nums11_19 = {11:'одиннадцать',12:'двенадцать',13:'тринадцать',14:'четырнадцать',15:'пятнадцать',
+                16:'шестнадцать',17:'семнадцать',18:'восемнадцать',19:'двадцать'}
 
-    if number in range(0,11):
-        return prefixes[number]+prefixes_end[number]
-    elif number in range(11,20):
-        if number == 12:
-            return prefixes[2]+'e'+suffixes[10]
-        return prefixes[number%10]+suffixes[10]
-    elif number in range(20,100):
+    krat10nums = {20:'двадцать',30:'тридцать',40:'сорок',50:'пятьдесят',60:'шестьдесят',
+                70:'семьдесят',80:'восемдесят',90:'девяносто'}
+
+    if number >= 0 and number < 11:
+        return nums0_10[number]
+
+    elif number >= 11 and number < 20:
+        return nums11_19[number]
+
+    elif number >= 20 and number < 100:
         j = number%10
         i = number-j
         if j == 0:
-            return suffixes[i]+prefixes[j]
-        return suffixes[i]+' '+prefixes[j]+prefixes_end[j]
+            return krat10nums[number]
+        else:
+            return krat10nums[i]+' '+nums0_10[j]
     else:
         return "Error: Entered number not in 0-99"
 
 
 if __name__ == '__main__':
-    print('For exit press Ctrl+C')
+    print("For exit type 'q' in input")
     while True:
-        print('Вывод: ',gen_str_numbers(int(input('Ввод: '))))
+        inp = input('Ввод: ')
+        if inp == 'q':
+            break
+        print('Вывод: ',gen_str_numbers(int(inp)))
 
     

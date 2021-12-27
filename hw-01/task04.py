@@ -9,7 +9,7 @@ def make_song(song_lib: dict,common_string: str):
     song_text = ''
     for couplet in range(len(song_list)-1):
         song_text = song_text+'{0} {1}!\n{0} {1}!\n'.format(common_string,song_list[couplet])
-        for string in range(couplet+1):
+        for string in range(couplet,-1,-1):
             song_text=song_text+'{0},\n'.format(song_lib[song_list[string]])
         song_text = song_text[:-2]+'.\n\n'
     song_text = song_text+'{0} {1}!\n{0} {1}!\n{2}'.format(common_string,song_list[-1],song_lib[song_list[-1]])
