@@ -1,23 +1,25 @@
 """Смоделируйте прием успешно окончивших тренинг студентов на работу в EPAM.
-Вам необходимо будет реализовать класс Student, будущие создаваемые объекты которого описываются именем, фамилией, возрастом и набором
-навыков. Говоря о навыках, считается, что все без исключения студенты знают английский язык.
-Также реализуйте в классе следующие методы: 
--зачисление на курс (в результате работы которого у объекта-студента изменяется логический атрибут is_learning на значение True;
-метод вызывается автоматически при создании объекта);
+Вам необходимо будет реализовать класс Student, будущие создаваемые объекты которого описываются именем, 
+фамилией, возрастом и набором навыков. Говоря о навыках, считается, что все без исключения студенты 
+знают английский язык.Также реализуйте в классе следующие методы: 
+-зачисление на курс (в результате работы которого у объекта-студента 
+изменяется логический атрибут is_learning на значение True; метод вызывается автоматически при создании объекта);
 -обучение (в результате работы которого студенты помимо английского языка, смогут пополнить свой багаж знаний еще такими навыками, 
 как SQL, Linux и Python);
 -прием на работу (отрабатывает успешно, если студент обладает всеми необходимыми навыками).
 Создайте трех разных студентов. Двоих студентов обучите всем навыкам. Третий, к всеобщему сожалению, 
 не выучит Python. Попробуйте принять всех троих на работу."""
 
+
 class Student:
     """The class represents EPAM student who study to get job invitaion"""
-    required_skills = ('English','SQL','Linux','Python')
+    required_skills = ('English', 'SQL', 'Linux', 'Python')
 
-    def __init__(self,name :str,second_name: str,age: int,*skills) -> None:
+    def __init__(self, name: str, second_name: str, age: int, *skills) -> None:
         """Creates the Student with name,second name and age. 
-        Skills parameter should be a dictionary containing name of skills as keys (default: English,SQL,Linux,Python) and
-        grades 0-5 for each skill as dict value. for example: {'English':4,'SQL':3,'Linux':2,'Python':5}"""
+        Skills parameter should be a dictionary containing name of skills as keys 
+        (default: English,SQL,Linux,Python) and grades 0-5 for each skill as dict 
+        value. for example: {'English':4,'SQL':3,'Linux':2,'Python':5}"""
         self.name = name
         self.second_name = second_name
         self.age = age
@@ -38,39 +40,36 @@ class Student:
         self.is_working = True
         return True
 
-
-    def train_skill(self,skill_name:str):
+    def train_skill(self, skill_name: str):
         """Method takes name of skill. If skill name not in the skills list, it offers to add new one."""
         if skill_name in self.skills:
             print(f"{self.name} already knows {skill_name}")
         elif skill_name in self.required_skills:
             self.skills.add(skill_name)
         else:
-            print('Skill name not found in skills names. If you want to add this skill as new, type "yes", if not, type any',end=' ')
+            print('Skill name not found in skills names. If you want to add this skill as new, type "yes", if not, type any', end=' ')
             if input() == 'yes':
                 self.skills.add(skill_name)
 
+
 if __name__ == '__main__':
-    st1 = Student('Bob','Smith','20','English','French','Python')
-    st2 = Student('John','McKinsey','28','English','Linux')
-    st3 = Student('Rob','Kendal','18','English')
-    #Study process
-    #Student 1 study
+    st1 = Student('Bob', 'Smith', '20', 'English', 'French', 'Python')
+    st2 = Student('John', 'McKinsey', '28', 'English', 'Linux')
+    st3 = Student('Rob', 'Kendal', '18', 'English')
+    # Study process
+    # Student 1 study
     st1.train_skill('English')
     st1.train_skill('SQL')
     st1.train_skill('Linux')
-    #Student 2 study
+    # Student 2 study
     st2.train_skill('SQL')
     st2.train_skill('Linux')
     st2.train_skill('Python')
-    #Student 3 study
+    # Student 3 study
     st3.train_skill('SQL')
     st3.train_skill('Linux')
 
-    #Check students for job requirement
-    studs = [st1,st2,st3]
+    # Check students for job requirement
+    studs = [st1, st2, st3]
     for i in range(len(studs)):
-        print('{0} {1} is hired: {2}'.format(studs[i].name,studs[i].second_name,studs[i].accept_job()))
-
-    
-
+        print('{0} {1} is hired: {2}'.format(studs[i].name, studs[i].second_name, studs[i].accept_job()))

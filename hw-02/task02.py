@@ -20,6 +20,8 @@ class Product:
         discounted_price    int or float
         etc     dict
     Methods:
+        find_mean_price()
+            (classmethod) Returns mean price of all created Product objects
         get_price
             Method returns price of Product (property)
         calculate_footprint()
@@ -28,12 +30,20 @@ class Product:
         discount_price(discount_perc)
             Method takes discount percent and returns discounted price and sets discounted_price by simple discount
     """
+    product_list = []
+
     def __init__(self,brand_name,model_name,price,**etc) -> None:
         self.brand_name = brand_name
         self.model_name = model_name
         self.price = price
         self.discounted_price = None
         self.etc = etc
+        Product.product_list.append(self)
+
+    @classmethod
+    def find_mean_price(self):
+        all_prices = [i.price for i in self.product_list]
+        return np.mean(all_prices)
 
     @property
     def get_price(self):
@@ -118,9 +128,7 @@ tv2 = TV('Xiaomi','Mi TV P1 43',33390,43)
 tv3 = TV('LG','32LM6380',24700,32,width=18,length=46.4)
 tv4 = TV('Samsung','UE-32T5300',27640,32,width=15.1,length=46.5)
 
-products = [rf1,rf2,rf3,rf4,tv1,tv2,tv3,tv4]
-prices = [i.get_price for i in products]
-print("Mean price of products:",np.mean(prices))
+print("Mean price of products:",Product.find_mean_price())
 print("TV[0] and TV[1] are equal: ",tv1==tv2)
 print("TV[0] and TV[3] are equal: ",tv1==tv4)
 print("Occupied area of product rf3: ", rf3.calculate_footprint()," m^2")
