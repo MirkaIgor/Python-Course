@@ -17,15 +17,14 @@ class Student:
 
     def __init__(self, name: str, second_name: str, age: int, *skills) -> None:
         """Creates the Student with name,second name and age. 
-        Skills parameter should be a dictionary containing name of skills as keys 
-        (default: English,SQL,Linux,Python) and grades 0-5 for each skill as dict 
-        value. for example: {'English':4,'SQL':3,'Linux':2,'Python':5}"""
+        Skills should be added as additional parameters"""
         self.name = name
         self.second_name = second_name
         self.age = age
         self.is_learning = False
         self.is_working = False
         self.skills = set(skills)
+        self.skills.add("English")
         self.accept_learn()
 
     def accept_learn(self):
@@ -71,5 +70,5 @@ if __name__ == '__main__':
 
     # Check students for job requirement
     studs = [st1, st2, st3]
-    for i in range(len(studs)):
-        print('{0} {1} is hired: {2}'.format(studs[i].name, studs[i].second_name, studs[i].accept_job()))
+    for _, val in enumerate(studs):
+        print('{0} {1} is hired: {2}'.format(val.name, val.second_name, val.accept_job()))
