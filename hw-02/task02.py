@@ -38,7 +38,7 @@ class Product:
         self.price = price
         self.discounted_price = None
         self.etc = etc
-        __class__.product_list.append(self)
+        self.__class__.product_list.append(self)
 
     @classmethod
     def find_mean_price(cls):

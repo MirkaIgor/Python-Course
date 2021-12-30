@@ -70,5 +70,5 @@ if __name__ == '__main__':
 
     # Check students for job requirement
     studs = [st1, st2, st3]
-    for _, val in enumerate(studs):
-        print('{0} {1} is hired: {2}'.format(val.name, val.second_name, val.accept_job()))
+    for stud in studs:
+        print('{0} {1} is hired: {2}'.format(stud.name, stud.second_name, stud.accept_job()))
