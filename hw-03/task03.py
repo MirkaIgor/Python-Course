@@ -48,41 +48,26 @@ P(x)=an⋅xn+an−1⋅xn−1+...+a1⋅x+a0 (ПРОВЕРЬ В HTML. Там ст�
 """
 import argparse
 
-class Polynome:
-    def __init__(self,a: list,x: float, verbose: bool) -> None:
-        self.a = a
-        self.a_inv = a[::-1]
-        self.x = x[0]
-        self.v = verbose
-        self.max_koef = len(a)-1
-        self.result=None
+def count_polynome(a: list, x: float, verbose: bool):
+    a_inv = a[::-1]
+    x = x[0]
+    max_koef = len(a)-1
+    result=None
+
+    cur_res = 0
+    for i in range(max_koef,-1,-1):
+        cur_res+=a_inv[i]*(x**i)
+    result = cur_res
     
-    def count(self):
-        cur_res = 0
-        for i in range(self.max_koef,-1,-1):
-            cur_res+=self.a_inv[i]*(self.x**i)
-        self.result = cur_res
-        return cur_res
-
-    def __str__(self) -> str:
-        my_str=''
-        if self.result:
-            if self.v:
-                my_str+='Вычислено:\n'
-                for i in range(self.max_koef,-1,-1):
-                    my_str += '{0}*{1}+'.format(str(self.a_inv[i]),str(self.x**i))
-                return my_str[:-1]+'='+str(self.result)
-            else:
-                return 'Вычислено:\n'+str(self.result)
-        else:
-            my_str+= 'Выражение полинома:\n'
-            for i in range(self.max_koef,0,-1):
-                my_str+= '{0}*(x^{1})+'.format(str(self.a_inv[i]),str(i))
-            my_str+= str(self.a_inv[0])+'=P(x)'
-            return my_str
-            
-
-
+    my_str=''
+    if verbose:
+        my_str+='Вычислено:\n'
+        for i in range(max_koef,-1,-1):
+            my_str += '{0}*{1}+'.format(str(a_inv[i]),str(x**i))
+        return my_str[:-1]+'='+str(result)
+    else:
+        return 'Вычислено:\n'+str(result)
+        
 parser = argparse.ArgumentParser()
 parser.add_argument('-a',nargs='+',required=True,type=float,help='коэффициенты ai (float, от старшего к младшему)')
 parser.add_argument('-x',nargs=1,required=True,type=float,help='величина x (float)')
@@ -91,18 +76,8 @@ parser.add_argument('-v','--verbose',action='store_true',help="выводит в
                                                             xi - вычисленная i-я степень числа x\
                                                             p - итоговое значение")
 
-def run(args):
-    p = Polynome(args.a,args.x,args.verbose)
-    print(p)
-    p.count()
-    print(p)
-    print()
-
 if __name__ == '__main__':
-    try:
-        my_args = parser.parse_args()
-    except:
-        my_args = parser.parse_args('-a 1 2 3 -x 0'.split())
-        run(my_args)
-        my_args = parser.parse_args('-a 1 2 3 -x 2 -v'.split())
-        run(my_args)
+    my_args = parser.parse_args('-a 1 2 3 -x 0'.split())
+    print(count_polynome(my_args.a,my_args.x,my_args.verbose))
+    my_args = parser.parse_args('-a 1 2 3 -x 2 -v'.split())
+    print(count_polynome(my_args.a,my_args.x,my_args.verbose))

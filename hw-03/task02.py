@@ -23,6 +23,7 @@
     шрифтов, используя Lorem Ipsum для распечатки образцов.
 """
 
+FILENAME = 'hw-03/input.txt'
 
 def invert_text(text: str):
     lines = text.split('\n')
@@ -33,7 +34,7 @@ def invert_text(text: str):
         lines[ind_line] = ' '.join(words)
     return '\n'.join(lines)
 
-with open('hw-03/input.txt','r+',encoding='utf-8') as file:
+with open(FILENAME,'r+',encoding='utf-8') as file:
     text = invert_text(file.read())
     file.seek(0)
     file.write(text)
