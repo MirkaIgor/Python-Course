@@ -61,12 +61,11 @@ def count_polynome(a: list, x: float, verbose: bool):
     
     my_str=''
     if verbose:
-        my_str+='Вычислено:\n'
         for i in range(max_koef,-1,-1):
             my_str += '{0}*{1}+'.format(str(a_inv[i]),str(x**i))
         return my_str[:-1]+'='+str(result)
     else:
-        return 'Вычислено:\n'+str(result)
+        return str(result)
         
 parser = argparse.ArgumentParser()
 parser.add_argument('-a',nargs='+',required=True,type=float,help='коэффициенты ai (float, от старшего к младшему)')
@@ -77,7 +76,10 @@ parser.add_argument('-v','--verbose',action='store_true',help="выводит в
                                                             p - итоговое значение")
 
 if __name__ == '__main__':
-    my_args = parser.parse_args('-a 1 2 3 -x 0'.split())
-    print(count_polynome(my_args.a,my_args.x,my_args.verbose))
-    my_args = parser.parse_args('-a 1 2 3 -x 2 -v'.split())
+    # Output examples:
+    # parser.parse_args('-a 1 2 3 -x 0'.split())
+    # Output: 3.0
+    # parser.parse_args('-a 1 2 3 -x 2 -v'.split())
+    # Output: 1.0*4.0+2.0*2.0+3.0*1.0=11.0
+    my_args = parser.parse_args()
     print(count_polynome(my_args.a,my_args.x,my_args.verbose))
