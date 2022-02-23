@@ -43,6 +43,10 @@ def test_float_mult(a,b,expected_value):
 def test_int_div(a,b,expected_value):
     assert c.int_div(a,b)==int(expected_value)
 
+def test_int_div_error():
+    with pytest.raises(ZeroDivisionError):
+        c.int_div(1,0)
+
 @pytest.mark.parametrize("a, b, expected_value",[(5,2,2.5),
                                                 (7.68,2.4,3.2)])
 def test_float_div(a,b,expected_value):

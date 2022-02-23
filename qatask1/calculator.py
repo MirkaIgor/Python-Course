@@ -1,7 +1,6 @@
 import math
 
 def int_sum(a: int,b: int) -> int:
-    pass
     return a + b
 
 def float_sum(a: float,b: float) -> float:
